@@ -26,6 +26,12 @@ You should create a subfolder with your name under the year you're solving puzzl
     etc.
  
 You can commit your work-in-progress and your solutions directly to your folder. There shouldn't be any merge conflicts, unless someone else is changing _your_ code!
+It's probably wise to separate every puzzle into its own folder:
+
+    \2021\user\Day01
+    \2021\user\Day08    
+    \2021\user\Day10
+    etc.
    
 Tip: you can find the puzzles for previous events online at https://www.adventofcode.com/<year> e.g. https://www.adventofcode.com/2020 and it's still as much fun to solve them.
 
