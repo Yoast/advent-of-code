@@ -5,10 +5,14 @@ Advent of Code is an Advent calendar of small programming puzzles for a variety 
 
 You don't need a computer science background to participate - just a little programming knowledge and some problem solving skills will get you pretty far. Nor do you need a fancy computer; every problem has a solution that completes in at most 15 seconds on ten-year-old hardware.
 
-Since solving the puzzles _quickly_ gives more points, you should expect that the code in this repository...
-- does not adhere to any style or standard, 
-- is not easy to read
-- to work more half the time!
+Since solving the puzzles _quickly_ will earn you more points, you should expect that the code in this repository...
+- was typed in a rush
+- takes shortcuts
+- contain hardcoded stuff
+- does not adhere to any style or standard at all, 
+- is hard to read
+- to even work more than half the time ;-) 
+It should be clear that this is not a showcase of what we at Yoast can do - it's intended to be fun and experimental, which can and probably will result in some stuff that you wouldn't want to see in a production environment. And that's OK!
 
 ## To join
 Every year, a root folder will be added:
