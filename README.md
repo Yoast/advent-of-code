@@ -8,7 +8,7 @@ You don't need a computer science background to participate - just a little prog
 Since solving the puzzles _quickly_ will earn you more points, you should expect that the code in this repository...
 - was typed in a rush
 - takes shortcuts
-- contain hardcoded stuff
+- contains hardcoded stuff
 - does not adhere to any style or standard at all, 
 - is hard to read
 - to even work more than half the time ;-) 
