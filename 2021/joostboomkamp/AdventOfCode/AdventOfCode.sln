@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdventOfCode", "AdventOfCode\AdventOfCode.csproj", "{C4AD8CC8-C758-4C7D-B299-24B2319C8213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdventOfCode", "AdventOfCode\AdventOfCode.csproj", "{C4AD8CC8-C758-4C7D-B299-24B2319C8213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Day1", "Day1\Day1.csproj", "{05FA6BDC-707D-4CB5-9DDB-1C087EB5B7FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Day1", "Day1\Day1.csproj", "{05FA6BDC-707D-4CB5-9DDB-1C087EB5B7FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AOCTests", "AOCTests\AOCTests.csproj", "{BF1E4FB1-FEF4-4D61-9A22-2E652B306F57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{05FA6BDC-707D-4CB5-9DDB-1C087EB5B7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05FA6BDC-707D-4CB5-9DDB-1C087EB5B7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05FA6BDC-707D-4CB5-9DDB-1C087EB5B7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF1E4FB1-FEF4-4D61-9A22-2E652B306F57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF1E4FB1-FEF4-4D61-9A22-2E652B306F57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF1E4FB1-FEF4-4D61-9A22-2E652B306F57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF1E4FB1-FEF4-4D61-9A22-2E652B306F57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
