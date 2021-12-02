@@ -4,7 +4,7 @@ using NUnit.Framework;
 
 namespace AOCTests;
 
-public class Tests
+public class Day1Tests
 {
     [SetUp]
     public void Setup()
@@ -12,7 +12,7 @@ public class Tests
     }
 
     [Test]
-    public void Test_Example()
+    public void Test_Day01_Example()
     {
         // Arrange
         var input = InputDay01.Example;
@@ -27,7 +27,7 @@ public class Tests
 
 
     [Test]
-    public void Test_Puzzle()
+    public void Test_Day01_Puzzle()
     {
         // Arrange
         var input = InputDay01.Puzzle;
@@ -41,7 +41,7 @@ public class Tests
     }
 
     [Test]
-    public void Test_Example_2()
+    public void Test_Day01_Example_2()
     {
         // Arrange
         var input = InputDay01.Example;
@@ -56,7 +56,7 @@ public class Tests
 
 
     [Test]
-    public void Test_Puzzle_2()
+    public void Test_Day01_Puzzle_2()
     {
         // Arrange
         var input = InputDay01.Puzzle;
