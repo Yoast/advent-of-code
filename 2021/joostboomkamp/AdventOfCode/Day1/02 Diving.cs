@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Day1;
+namespace Puzzles;
 
 public enum Direction
 {
@@ -43,7 +43,6 @@ public class Diving
     protected Point Location = new Point(0, 0);
 
     public int Result => Location.X * Location.Y;
-
     public int Aim { get; protected set; } = 0;
 
     public void Move(Step step)
@@ -63,11 +62,11 @@ public class Diving
         {
             case Direction.Up: Aim -= step.Steps; break;
             case Direction.Down: Aim += step.Steps; break;
-            case Direction.Forward: 
-                Location.X += step.Steps; 
-                Location.Y += Aim * step.Steps;  break;
-            case Direction.Backward: 
-                Location.X -= step.Steps; 
+            case Direction.Forward:
+                Location.X += step.Steps;
+                Location.Y += Aim * step.Steps; break;
+            case Direction.Backward:
+                Location.X -= step.Steps;
                 Location.Y -= Aim * step.Steps; break;
         }
 

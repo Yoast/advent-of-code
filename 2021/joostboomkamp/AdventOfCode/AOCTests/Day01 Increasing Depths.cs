@@ -1,10 +1,11 @@
-using Day1;
+using Puzzles;
 using FluentAssertions;
 using NUnit.Framework;
+using Puzzles.Input;
 
 namespace AOCTests;
 
-public class Day1Tests
+public class Day01Tests
 {
     [SetUp]
     public void Setup()

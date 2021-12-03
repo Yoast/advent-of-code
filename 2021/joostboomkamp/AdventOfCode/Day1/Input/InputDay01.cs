@@ -1,4 +1,4 @@
-﻿namespace Day1;
+﻿namespace Puzzles.Input;
 
 public class InputDay01
 {

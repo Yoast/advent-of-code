@@ -1,4 +1,4 @@
-﻿namespace Day1
+﻿namespace Puzzles
 {
     public class SonarSweep
     {
