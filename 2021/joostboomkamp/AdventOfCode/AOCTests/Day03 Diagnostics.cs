@@ -2,8 +2,6 @@ using FluentAssertions;
 using NUnit.Framework;
 using Puzzles;
 using Puzzles.Input;
-using System;
-using System.Linq;
 
 namespace AOCTests;
 
