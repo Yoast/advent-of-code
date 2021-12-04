@@ -113,7 +113,7 @@ namespace Puzzles
         {
             var card = new BingoCard ();
             var y = 0;
-            foreach (var line in source.Split(Environment.NewLine))
+            foreach (var line in source.Split("\n"))
             {
                 var numbers = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                 for(var x=0; x<numbers.Length; x++)

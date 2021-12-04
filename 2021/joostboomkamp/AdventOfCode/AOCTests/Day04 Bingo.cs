@@ -57,7 +57,7 @@ public class Day04Tests
         var result = game.Run();
 
         // Assert
-        result.Should().Be(14 * 824);
+        result.Should().Be(11536);
     }
 
 
