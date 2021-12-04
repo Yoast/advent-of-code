@@ -116,13 +116,16 @@ class Game {
 
 	public function play(): Board {
 		foreach ( $this->drawNumbers as $number ) {
-			foreach ( $this->boards as $board ) {
+			$this->lastNumber = $number;
+			foreach ( $this->boards as $boardIndex => $board ) {
 				$board->mark( $number );
 
 				if ( $board->hasCompleteRowOrColumn() ) {
-					$this->lastNumber = $number;
+					unset( $this->boards[$boardIndex] );
 
-					return $board;
+					if( count( $this->boards ) === 0 ) {
+						return $board;
+					}
 				}
 			}
 		}
