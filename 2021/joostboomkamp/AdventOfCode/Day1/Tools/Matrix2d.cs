@@ -1,43 +1,82 @@
-﻿namespace Puzzles.Tools
+﻿using System.Text;
+
+namespace Puzzles.Tools;
+public class Matrix2d<T>
 {
-    public class Matrix2d<T>
+    protected T[][] Data { get; set; }
+
+    public int Width { get; }
+    public int Height { get; }
+
+    public int OffsetX { get; set; } = 0;
+    public int OffsetY { get; set; } = 0;
+
+    public Matrix2d(int width, int height) 
     {
-        protected T[][] Data { get; set; }
+        Width = width;
+        Height = height;
 
-        public int Width { get; }
-        public int Height { get; }
+        Data = new T[Height][];
 
-        public Matrix2d(int width, int height = 0) 
+        for(var y = 0; y < Height; y++)
         {
-            Width = width;
-            Height = height;
+            Data[y] = new T[Width];
+        }
+    }
 
-            Data = new T[Height][];
-
-            for(var y = 0; y < Height; y++)
+    public bool Contains(T needle)
+    {
+        foreach (var line in Data)
+        {
+            if (line.Any(other => other?.Equals(needle) == true))
             {
-                Data[y] = new T[Width];
+                return true;
             }
         }
-
-        public bool Contains(T needle)
-        {
-            for (var y = 0; y < Data.Length; y++)
-            {
-                if (Data[y].Any(other => other?.Equals(needle) == true))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        return false;
+    }
     
-        // Data is a vertical array of rows first.
-        // Reverse Y and X access order, to make the matrix easier to debug
-        public T this[int x, int y]
+    // Data is a vertical array of rows first.
+    // Reverse Y and X access order, to make the matrix easier to debug
+    public T this[int x, int y]
+    {
+        get { return Data[y + OffsetY][x + OffsetX]; }
+        set { Data[y + OffsetY][x + OffsetX] = value; }
+    }
+
+    public int Count(Func<T, bool> p)
+    {
+        var count = 0;
+        foreach (var line in Data)
         {
-            get { return Data[y][x]; }
-            set { Data[y][x] = value; }
+            count += line.Count(p);
         }
+
+        return count;
+    }
+
+    public bool Any(Func<T, bool> p)
+    {
+        foreach (var line in Data)
+        {
+            if (line.Any(p)) return true;
+        }
+
+        return false;
+    }
+
+    public override string ToString()
+    {
+        var sb = new StringBuilder();
+        foreach(var line in Data)
+        {
+            foreach(var item in line)
+            {
+                sb.Append(item?.ToString() ?? "NULL");
+                sb.Append(" ");
+            }
+            sb.Append(Environment.NewLine);
+        }
+        return sb.ToString();
     }
 }
