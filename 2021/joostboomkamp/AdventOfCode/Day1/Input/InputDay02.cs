@@ -1,14 +1,16 @@
-﻿namespace Puzzles.Input;
+﻿using Puzzles.Tools;
+
+namespace Puzzles.Input;
 
 public class InputDay02
 {
-    public static string Example = @"forward 5
+    public static string[] Example = @"forward 5
 down 5
 forward 8
 up 3
 down 8
-forward 2";
-    public static string Puzzle = @"forward 6
+forward 2".SplitByLine();
+    public static string[] Puzzle = @"forward 6
 down 3
 forward 8
 down 5
@@ -1007,5 +1009,5 @@ down 6
 up 3
 forward 3
 forward 5
-forward 7";
+forward 7".SplitByLine();
 }

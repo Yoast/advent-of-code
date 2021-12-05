@@ -34,26 +34,6 @@ public class HydrothermalVents
                 _map[point.X, point.Y] += 1;
             }
         }
-
-        //for(var y = upperLeftY; y <= LowerRightY; y++)
-        //{
-        //    for (var x = upperLeftX; x <= LowerRightX; x++)
-        //    {
-        //        foreach (var line in _lines)
-        //        {
-        //            _map[x, y] = lines.Count(line => line.Intersects(x, y));
-        //            //if (line.Intersects(x, y))
-        //            //{
-        //            //    _map[x, y] = _map[x, y] + 1;
-        //            //    //Debugger.Log(0, null, $"{x},{y} intersects {line}" + Environment.NewLine);
-        //            //} else
-        //            //{
-        //            //    //Debugger.Log(0, null, $"{x},{y} does not intersect {line}" + Environment.NewLine);
-        //            //}
-        //        }
-        //    }
-        //    //Debugger.Log(0, null, _map.ToString() + Environment.NewLine);
-        //}
     }
 
     public int CountRiskyZones => _map.Count(p => p >= 2);
@@ -89,6 +69,9 @@ public class VentLine
         if (diff == 0) return 0;
         return diff / Math.Abs(diff); // transforms -4 to -1 but also 4 to 1
     }
+
+    // Force use of Parse method
+    private VentLine() {}
 
     public static VentLine Parse(string input)
     {
