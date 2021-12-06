@@ -17,7 +17,7 @@ public class Day06_LanternFish
     {
         // arrange
         var input = InputDay06.Example;
-        var cut = new School(input);
+        var cut = new School2(input);
 
         // act
         cut.Tick();
@@ -26,13 +26,12 @@ public class Day06_LanternFish
         cut.ToString().Should().Be("After    1 days: 2, 3, 2, 0, 1");
     }
 
-
     [Test]
     public void Test_Day06_Spawn()
     {
         // arrange
         var input = InputDay06.Example;
-        var cut = new School(input);
+        var cut = new School2(input);
 
         // act
         cut.Tick(4);
@@ -46,7 +45,7 @@ public class Day06_LanternFish
     {
         // arrange
         var input = InputDay06.Example;
-        var cut = new School(input);
+        var cut = new School2(input);
 
         // act
         cut.Tick(18);
@@ -66,7 +65,7 @@ public class Day06_LanternFish
         cut.Tick(80);
 
         // assert
-        cut.Count().Should().Be(5934);
+        cut.Count.Should().Be(5934);
     }
 
     [Test]
@@ -80,7 +79,7 @@ public class Day06_LanternFish
         cut.Tick(80);
 
         // assert
-        cut.Count().Should().Be(371379);
+        cut.Count.Should().Be(371379);
     }
 
     [Test]
@@ -91,10 +90,10 @@ public class Day06_LanternFish
         var cut = new School(input);
 
         // act
-        cut.Tick(256);
+        cut.Tick(255);
 
         // assert
-        cut.Count().Should().Be(26984457539);
+        cut.Count.Should().Be(1525126772942L);//26984457539L);
     }
 
     [Test]
@@ -108,6 +107,6 @@ public class Day06_LanternFish
         cut.Tick(256);
 
         // assert
-        cut.Count().Should().Be(371379);
+        cut.Count.Should().Be(1674303997472L);
     }
 }
