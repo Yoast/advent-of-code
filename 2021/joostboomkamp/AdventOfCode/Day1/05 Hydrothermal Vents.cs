@@ -71,7 +71,9 @@ public class VentLine
     }
 
     // Force use of Parse method
-    private VentLine() {}
+    private VentLine() { 
+        Points = new Point[] { }; 
+    }
 
     public static VentLine Parse(string input)
     {
