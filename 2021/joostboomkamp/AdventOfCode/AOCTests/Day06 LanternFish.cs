@@ -44,14 +44,14 @@ public class Day06_LanternFish
     public void Test_Day06_256Days_example()
     {
         // arrange
-        var input = InputDay06.Puzzle;
+        var input = InputDay06.Example;
         var cut = new School(input);
 
         // act
         cut.Tick(255);
 
         // assert
-        cut.Count.Should().Be(1525126772942L);
+        cut.Count.Should().Be(24654746147L);
     }
 
     [Test]
