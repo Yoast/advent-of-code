@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using NUnit.Framework;
 using Puzzles;
+using Puzzles.Tools;
 using System.Linq;
 
 namespace AOCTests
@@ -15,7 +16,7 @@ namespace AOCTests
             var map = new HeatMap(InputDay09.Example);
 
             // act
-            var list = map.CoolestSpots().ToArray();
+            var list = map.DeepestLevels().ToArray();
 
             // assert
             list.Count().Should().Be(4);
@@ -30,7 +31,7 @@ namespace AOCTests
             var map = new HeatMap(InputDay09.Puzzle);
 
             // act
-            var list = map.CoolestSpots().ToArray();
+            var list = map.DeepestLevels().ToArray();
 
             // assert
             list.Count().Should().Be(251);
@@ -38,6 +39,30 @@ namespace AOCTests
             list.Risk().Should().Be(580);
         }
 
+        [Test]
+        public void TestExample2()
+        {
+            // arrange
+            var map = new HeatMap(InputDay09.Example);
 
+            // act
+            var basins = map.Basins();
+
+            // assert
+            basins.Should().Be(1134);
+        }
+
+        [Test]
+        public void TestPuzzle2()
+        {
+            // arrange
+            var map = new HeatMap(InputDay09.Puzzle);
+
+            // act
+            var basins = map.Basins();
+
+            // assert
+            basins.Should().Be(856716);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Drawing;
+using System.Text;
 
 namespace Puzzles.Tools;
 public class Matrix2d<T>
@@ -42,6 +43,12 @@ public class Matrix2d<T>
     {
         get { return Data[y + OffsetY][x + OffsetX]; }
         set { Data[y + OffsetY][x + OffsetX] = value; }
+    }
+
+    public T this[Point p]
+    {
+        get {  return this[p.X, p.Y]; }
+        set { this[p.X, p.Y] = value; }
     }
 
     public int Count(Func<T, bool> p)

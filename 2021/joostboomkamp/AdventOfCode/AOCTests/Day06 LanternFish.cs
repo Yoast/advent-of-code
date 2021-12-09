@@ -4,7 +4,7 @@ using Puzzles;
 using Puzzles.Input;
 
 namespace AOCTests;
-public class Day06_LanternFish
+public class Day06Tests
 {
 
     [SetUp]
