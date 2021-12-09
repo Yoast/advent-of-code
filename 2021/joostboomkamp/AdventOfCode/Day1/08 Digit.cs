@@ -125,7 +125,7 @@ public class Digits
 			fourParts.Single(c => !oneParts.Contains(c) && 
 				c != known[Position.Center]);
 
-		// 9 => all known parts AND bottom; 
+		// 9 => all known parts AND bottom and both of the one's elements; 
 		var nineParts = digits.Where(nine =>
 			nine.Length == 6 &&
 			oneParts.All(c => nine.Contains(c)) && // the 6 has just the topleft of the oneParts.
@@ -136,12 +136,14 @@ public class Digits
 				!oneParts.Contains(c) && 
 				!known.Values.Contains(c));
 
+		// 5
 		var fiveTargets = new [] { known[Position.Top], known[Position.Bottom], known[Position.Center], known[Position.TopLeft] };
-		var fiveParts = digits.Single(x =>
-			x.Length == 5 &&
-			((x.Contains(oneParts[0]) && !x.Contains(oneParts[1])) ||
-			 (x.Contains(oneParts[1]) && !x.Contains(oneParts[0]))) &&
-			fiveTargets.All(t => x.Contains(t)));
+		var fiveParts = digits.Single(five =>
+			five.Length == 5 &&
+			((five.Contains(oneParts[0]) && !five.Contains(oneParts[1])) ||
+			 (five.Contains(oneParts[1]) && !five.Contains(oneParts[0]))) &&
+			fiveTargets.All(t => five.Contains(t)));
+
 		// BottomRight is known; Top Right is known;
 		var b_r_index = fiveParts.Contains(oneParts[0])
 			? 0 : 1;
