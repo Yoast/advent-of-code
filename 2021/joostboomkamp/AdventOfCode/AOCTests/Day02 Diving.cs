@@ -2,6 +2,7 @@ using FluentAssertions;
 using NUnit.Framework;
 using Puzzles;
 using Puzzles.Input;
+using Puzzles.Tools;
 using System;
 using System.Linq;
 
@@ -18,7 +19,7 @@ public class Day02Tests
     public void Test_Example()
     {
         // Arrange
-        var input = InputDay02.Example.Split(Environment.NewLine).Select(Step.Parse);
+        var input = InputDay02.Example.Select(Step.Parse);
         var cut = new Diving();
 
         // Act
@@ -37,7 +38,7 @@ public class Day02Tests
     public void Test_Puzzle()
     {
         // Arrange
-        var input = InputDay02.Puzzle.Split(Environment.NewLine).Select(Step.Parse);
+        var input = InputDay02.Puzzle.Select(Step.Parse);
         var cut = new Diving();
 
         // Act
@@ -56,7 +57,7 @@ public class Day02Tests
     public void Test_Example2()
     {
         // Arrange
-        var input = InputDay02.Example.Split(Environment.NewLine).Select(Step.Parse);
+        var input = InputDay02.Example.Select(Step.Parse);
         var cut = new Diving();
 
         // Act
@@ -75,7 +76,7 @@ public class Day02Tests
     public void Test_Puzzle2()
     {
         // Arrange
-        var input = InputDay02.Puzzle.Split(Environment.NewLine).Select(Step.Parse);
+        var input = InputDay02.Puzzle.Select(Step.Parse);
         var cut = new Diving();
 
         // Act
