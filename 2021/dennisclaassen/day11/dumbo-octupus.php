@@ -32,10 +32,15 @@ $octopy = array_map(
 $cavern = Cavern::fromMap($octopy);
 echo 'Before any steps:' . PHP_EOL;
 $flashes = 0;
-for($i = 1; $i <= 100; $i++ ) {
+$nrOfSteps = 0;
+while( $flashes !== 100 ) {
 	//$cavern->render(); echo PHP_EOL;
-	$flashes += $cavern->step();
-	echo 'After step ' . $i . ' (' . $flashes . ') flashes' . PHP_EOL;
+	$flashes = $cavern->step();
+	$nrOfSteps += 1;
+	if( $flashes === 100 ) {
+		echo 'After step ' . $nrOfSteps . ' (' . $flashes . ') flashes' . PHP_EOL;
+		break;
+	}
 }
 //$cavern->render();
 //$flashes = $cavern->step();
