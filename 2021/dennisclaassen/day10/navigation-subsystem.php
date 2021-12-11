@@ -2,7 +2,7 @@
 
 $input = require './input.php';
 
-$finput = <<<'INPUT'
+$infput = <<<'INPUT'
 [({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(
 {([(<{}[<>[]}>{[]{[(<()>
@@ -17,17 +17,30 @@ INPUT;
 
 /** @var Line[] $lines */
 $lines = array_map( [ Line::class, 'fromInput' ], explode( PHP_EOL, $input ) );
-$score = 0;
+$syntaxErrorScore = 0;
+$autocompleteScores = [];
 foreach ( $lines as $line ) {
 	try {
-		$line->validate();
+		$autocompleteScores[] = $line->getAutocompleteScore();
+//		echo 'Valid!' . PHP_EOL;
 	} catch ( \InvalidSyntax $t ) {
-		echo ( $t->getMessage() ) . PHP_EOL;
-		$score += $t->getSyntaxErrorScore();
+//		echo ( $t->getMessage() ) . PHP_EOL;
+		$syntaxErrorScore += $t->getSyntaxErrorScore();
 	}
 }
 
-var_dump( 'Score:', $score);
+printf( '$syntaxErrorScore: %d%s', $syntaxErrorScore, PHP_EOL);
+
+asort($autocompleteScores);
+
+// this is terrible, but will remove the 2 outer values until we only have the middle one left.
+// Luckily we're sure the number of autocomplete scores will be odd, so we can take this approach.
+while( count( $autocompleteScores ) !== 1 ) {
+	array_shift( $autocompleteScores );
+	array_pop( $autocompleteScores );
+}
+
+printf( '$autocompleteScore: %d%s', reset($autocompleteScores), PHP_EOL);
 
 class Line {
 	private string $lineText;
@@ -47,21 +60,19 @@ class Line {
 		$this->lineText = $lineText;
 	}
 
-	public function validate() {
+	public function getAutocompleteScore():int {
 		$lineLength = strlen( $this->lineText );
 		$open       = [];
 		for ( $i = 0; $i < $lineLength; $i ++ ) {
 			$char = $this->lineText[ $i ];
 //			echo $char;
 			if ( array_key_exists( $char, $this->separators ) ) {
-//				echo ' is an opener' . PHP_EOL;
 				$open[] = $char;
 				continue;
 			}
 
 			$lastOpener = end( $open );
 			$lastCloser = $this->separators[ $lastOpener ];
-//			echo $char .' === '. $lastCloser . PHP_EOL;
 			if ( $char === $lastCloser ) {
 				array_pop( $open );
 				continue;
@@ -73,6 +84,39 @@ class Line {
 			);
 		}
 
+		$score = 0;
+//		echo PHP_EOL;
+		$completer = '';
+		$reversedOpen = array_reverse( $open );
+		foreach( $reversedOpen as $opener ) {
+//			echo 'Multiply ' . $score . ' by 5 to get ';
+			$score = $score * 5;
+			$closer = $this->separators[$opener];
+			$completer .= $closer;
+
+//			echo $score . ', then add the value of ' . $closer;
+			switch ( $closer ) {
+				case ')':
+					$score += 1;
+//					echo ' (1) ';
+					break;
+				case ']':
+					$score += 2;
+//					echo ' (2) ';
+					break;
+				case '}':
+					$score += 3;
+//					echo ' (3) ';
+					break;
+				case '>':
+					$score += 4;
+//					echo ' (4) ';
+					break;
+			}
+//			echo ' to get a new total score of ' . $score . '.' . PHP_EOL;
+		}
+		echo $completer . ' - ' . $score . '  total points.' . PHP_EOL;
+		return $score;
 	}
 }
 
