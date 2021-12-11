@@ -25,6 +25,42 @@ public class Matrix2d<T>
         }
     }
 
+    public static Matrix2d<int> ParseInt(string[] input)
+    {
+        return Parse<int>(input, int.Parse);
+    }
+
+    public static Matrix2d<T> Parse<T>(string[] input, Func<string, T> parser)
+    {
+        var map = new Matrix2d<T>(input[0].Length, input.Length);
+        var y = 0;
+        foreach (var line in input)
+        {
+            var x = 0;
+            foreach (var i in line)
+            {
+                map[x++, y] = parser(i.ToString());
+            }
+            y++;
+        }
+        Console.WriteLine(map.ToString());
+        return map;
+    }
+
+    internal IEnumerable<Point> Where(Func<T, bool> predicate)
+    {
+        for (var y = 0; y < Height; y++)
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                if (predicate(this[x, y]))
+                {
+                    yield return new Point(x, y);
+                }
+            }
+        }
+    }
+
     public bool Contains(T needle)
     {
         foreach (var line in Data)
@@ -62,6 +98,22 @@ public class Matrix2d<T>
         return count;
     }
 
+    internal int Sum(Func<T, bool> predicate)
+    {
+        var count = 0;
+        for (var y = 0; y < Height; y++)
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                if (predicate(this[x, y]))
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
     public bool Any(Func<T, bool> p)
     {
         foreach (var line in Data)
@@ -72,7 +124,7 @@ public class Matrix2d<T>
         return false;
     }
 
-    public override string ToString()
+    public string ToString(string separator = " ")
     {
         var sb = new StringBuilder();
         foreach(var line in Data)
@@ -80,7 +132,7 @@ public class Matrix2d<T>
             foreach(var item in line)
             {
                 sb.Append(item?.ToString() ?? "NULL");
-                sb.Append(" ");
+                sb.Append(separator);
             }
             sb.Append(Environment.NewLine);
         }

@@ -35,6 +35,44 @@ public static class ExtToIntArrays
 		}
 	}
 
+	public static IEnumerable<Point> SurroundingPoints<T>(this Matrix2d<T> map, Point p)
+	{
+		return SurroundingPoints(map, p.X, p.Y);
+	}
+
+	public static IEnumerable<Point> SurroundingPoints<T>(this Matrix2d<T> map, int x, int y)
+	{
+		foreach (var p in map.AdjacentPoints(x, y))
+		{
+			yield return p;
+		}
+
+		if (y > 0) { 
+
+			if (x > 0)
+			{
+				yield return new Point(x - 1, y - 1);
+			}
+
+			if (x < map.Width - 1)
+			{
+				yield return new Point(x + 1, y - 1);
+			}
+		}
+
+		if (y < map.Height - 1)
+		{
+			if (x > 0)
+			{
+				yield return new Point(x - 1, y + 1);
+			}
+			if (x < map.Width - 1)
+			{
+				yield return new Point(x + 1, y + 1);
+			}
+		}
+	}
+
 	public static int Risk(this int[] source)
     {
 		return source.Sum(x => x + 1);
