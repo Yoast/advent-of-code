@@ -79,7 +79,7 @@ public class Day11Tests
 
         var result = cut.Steps(steps);
         
-        cut.ToString().Trim().Should().Be(expected);
+        cut.ToString().Trim().Should().Be(expected.ReplaceLineEndings());
     }
 
     [Test]
@@ -99,7 +99,7 @@ public class Day11Tests
         var cut = new LuminescentOctopi(input);
 
         var result = cut.Steps(100);
-        result.Should().Be(1337337);
+        result.Should().Be(1640);
     }
 
 
