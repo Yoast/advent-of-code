@@ -1,7 +1,13 @@
 ﻿namespace Puzzles;
 public class Pathfinding
 {
-    private Dictionary<string, Cave> Caves;
+    public Dictionary<string, Cave> Caves { get; private set; }
+    private string VisitedTwice = null;
+    private string AllowTwice = "";
+
+    public List<string> Paths = new List<string>();
+
+    public bool AllowRevisit { get; set; } = false;
 
     public int PathCount { get; private set; } = 0;
 
@@ -10,24 +16,39 @@ public class Pathfinding
         Caves = Cave.Parse(input).ToDictionary(c => c.Id);
     }
 
-    public string[] Paths()
+    public ICollection<string> GetPaths()
     {
         var start = Caves["start"];
         var visited = new List<string>();
-
-        var paths = PathsFrom(start, visited);
-        return paths.Select(p => string.Join(",", p)).ToArray();
+        var paths = new List<string>();
+        foreach(var c in Caves.Where(cave => cave.Value.Small && !cave.Value.IsStart && !cave.Value.IsEnd))
+        {
+            AllowTwice = c.Key;
+            var newPaths = PathsFrom(start, visited);
+            paths.AddRange(newPaths.Select(p => string.Join(", ", p)));
+        }
+        //var paths = PathsFrom(start, visited).ToArray();
+        paths = paths.Distinct().ToList();
+        return paths;
+        //return paths.Select(p => string.Join(",", p)).ToArray();
     }
 
-    private IEnumerable<List<string>> PathsFrom(Cave cave, ICollection<string> pathToHere)
+    public IEnumerable<ICollection<string>> PathsFrom(Cave cave, ICollection<string> pathToHere)
     {
         pathToHere.Add(cave.Id);
 
         // we've reached the end
         if (cave.IsEnd)
         {
-            PathCount++;
-            yield break;
+            var path = string.Join(",", pathToHere);
+            if (Paths.Contains(path)) {
+                yield break;
+            } else
+            {
+                PathCount++;
+                Paths.Add(path);
+                yield return pathToHere;
+            }
         }
 
         foreach (var destId in cave.Destinations)
@@ -35,7 +56,17 @@ public class Pathfinding
             var dest = Caves[destId];
             if (dest.Small && pathToHere.Contains(destId)) {
                 // do not visit small caves more than once
-                continue;
+                if (!AllowRevisit || AllowTwice != destId)
+                {
+                    continue;
+                }
+                //if (VisitedTwice != null)
+                //{
+                //    continue;
+                //} else
+                //{
+                //    VisitedTwice = destId;
+                //}
             }
 
             // enter that cave
@@ -47,6 +78,12 @@ public class Pathfinding
                 if (path.Contains("end"))
                     yield return path;
             }
+
+            // if the double visit to a small cave was below here, re-allow it
+            //if (VisitedTwice != null && !pathToHere.Contains(VisitedTwice))
+            //{
+            //    VisitedTwice = null;
+            //}
         }
     }
 }

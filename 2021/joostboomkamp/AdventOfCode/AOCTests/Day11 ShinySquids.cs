@@ -18,18 +18,18 @@ public class Day11Tests
         // act
         cut.Step();
         var result = cut.ToString();
-        result.Should().Be(@"34543
+        result.ReplaceLineEndings().Trim().Should().Be(@"34543
 40004
 50005
 40004
-34543");
+34543".ReplaceLineEndings());
         cut.Step();
         result = cut.ToString();
-        result.Should().Be(@"45654
+        result.ReplaceLineEndings().Trim().Should().Be(@"45654
 51115
 61116
 51115
-45654");
+45654".ReplaceLineEndings());
     }
 
     [TestCase(1, @"6594254334

@@ -6,13 +6,13 @@ public class Matrix2d<T>
 {
     protected T[][] Data { get; set; }
 
-    public int Width { get; }
-    public int Height { get; }
+    public int Width { get; private set; }
+    public int Height { get; private set; }
 
     public int OffsetX { get; set; } = 0;
     public int OffsetY { get; set; } = 0;
 
-    public Matrix2d(int width, int height) 
+    public Matrix2d(int width, int height, T emptyvalue = default(T)) 
     {
         Width = width;
         Height = height;
@@ -23,6 +23,74 @@ public class Matrix2d<T>
         {
             Data[y] = new T[Width];
         }
+        
+        for(var y=0; y<Height; y++)
+        {
+            for(var x=0; x<Width; x++)
+            {
+                this[x,y] = emptyvalue;
+            }
+        }
+    }
+
+    public Matrix2d<T> Subset(int startX, int startY, int endX, int endY)
+    {
+        var subset = new Matrix2d<T>(endX - startX, endY - startY);
+        subset.OffsetX = -startX;
+        subset.OffsetY = -startY;
+        for (var y = startY; y < endY; y++)
+        {
+            for (var x = startX; x < endX; x++)
+            {
+                subset[x, y] = this[x, y];
+            }
+        }
+        subset.OffsetX = 0;
+        subset.OffsetY = 0;
+        return subset;
+    }
+
+    public Matrix2d<T> Copy()
+    {
+        return Subset(0, 0, Width, Height);
+    }
+
+    public void FlipHorizontal()
+    {
+        var output = new Matrix2d<T>(Width, Height);
+        output.OffsetX = OffsetX;
+        output.OffsetY = OffsetY;
+
+        for (var y = 0; y < Height; y++)
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                output[x, y] = this[Width - x - 1, y];
+            }
+        }
+
+        Data = output.Data;
+        Width = output.Width;
+        Height = output.Height;
+    }
+
+    public void FlipVertical()
+    {
+        var output = new Matrix2d<T>(Width, Height);
+        output.OffsetX = OffsetX;
+        output.OffsetY = OffsetY;
+
+        for (var y = 0; y < Height; y++)
+        {
+            for (var x = 0; x < Width; x++)
+            {
+                output[x, y] = this[x, Height - y - 1];
+            }
+        }
+
+        Data = output.Data;
+        Width = output.Width;
+        Height = output.Height;
     }
 
     public static Matrix2d<int> ParseInt(string[] input)
