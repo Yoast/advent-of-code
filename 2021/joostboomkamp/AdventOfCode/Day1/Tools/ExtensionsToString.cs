@@ -6,4 +6,14 @@ public static class ExtensionsToString
     {
         return input.ReplaceLineEndings().Split(Environment.NewLine, options);
     }
+
+    public static ICollection<string> ToPairs(this string input)
+    {
+        var output = new List<string>();
+        for (var i = 1; i < input.Length; i++)
+        {
+            output.Add(input.Substring(i - 1, 2));
+        }
+        return output;
+    }
 }

@@ -1,6 +1,4 @@
-﻿using Puzzles.Tools;
-
-namespace Puzzles.Input;
+﻿namespace Puzzles.Input;
 public class InputDay08
 {
     public static string[] Example = new [] { 

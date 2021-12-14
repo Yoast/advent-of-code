@@ -1,6 +1,5 @@
 ﻿using Puzzles.Tools;
 using System.Drawing;
-using System.Linq;
 
 namespace Puzzles;
 

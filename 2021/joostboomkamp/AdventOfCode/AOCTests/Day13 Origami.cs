@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace AOCTests;
-public class Day1Tests
+public class Day13Tests
 {
     [Test]
     public void Example()
@@ -58,7 +58,7 @@ public class Day1Tests
     [Test]
     public void Example_Puzzle2()
     {
-        var input = InputDay13.Puzzle;
+        var input = InputDay13.Puzzle2;
         var cut = new Origami(input);
 
         cut.Fold(cut.Instructions[0]);
