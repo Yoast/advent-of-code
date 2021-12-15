@@ -35,6 +35,12 @@ public static class ExtToIntArrays
 		}
 	}
 
+	public static IEnumerable<Point> SouthEastOf<T>(this Matrix2d<T> map, Point p) => map.SouthEastOf(p.X, p.Y);
+	public static IEnumerable<Point> SouthEastOf<T>(this Matrix2d<T> map, int x, int y)
+	{
+		return map.AdjacentPoints<T>(x, y).Where(p => p.X >= x || p.Y >= y);
+	}
+
 	public static IEnumerable<Point> SurroundingPoints<T>(this Matrix2d<T> map, Point p)
 	{
 		return SurroundingPoints(map, p.X, p.Y);
