@@ -22,11 +22,12 @@ public class Maze
         }
         
         TotalCostMap = new Matrix2d<int>(Map.Width, Map.Height, int.MaxValue);
-        Map[0, 0] = 0; // does not cost anything
-
+        var v = Map[0, 0];
+        Map[0,0] = 0; // does not cost anything
         CalculateCost();
+        Map[0, 0] = v;
 
-        Console.WriteLine(TotalCostMap.ToString());
+        Console.WriteLine(TotalCostMap.ToString(" "));
     }
 
     private Matrix2d<int> Bloat5x5(Matrix2d<int> originalMap)
@@ -39,12 +40,11 @@ public class Maze
         {
             for (var x = 0; x < originalMap.Width; x++)
             {
-                bloatedMap[x, y] = originalMap[x, y];
                 // for each x,y in the original grid, extrapolate
                 // 5x5 values in the resulting grid, multiplied and increased.
-                for (var multiY = 1; multiY < 5; multiY++)
+                for (var multiY = 0; multiY < 5; multiY++)
                 {
-                    for (var multiX = 1; multiX < 5; multiX++)
+                    for (var multiX = 0; multiX < 5; multiX++)
                     {
                         var delta = lookupTable[multiX, multiY];
 
